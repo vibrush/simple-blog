@@ -20,4 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}', [PostController::class, 'destroy']);
 });
 
+Route::get('/dashboard', function () {
+    return redirect('/');
+})->middleware(['auth'])->name('dashboard');
+
 require __DIR__.'/auth.php';
