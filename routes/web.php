@@ -5,8 +5,6 @@ use App\Http\Controllers\PostController;
 
 Route::get('/', [PostController::class, 'index']);
 
-Route::get('/posts/{post}', [PostController::class, 'show']);
-
 Route::middleware('auth')->group(function () {
 
     Route::get('/posts/create', [PostController::class, 'create']);
@@ -20,6 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}', [PostController::class, 'destroy']);
 });
 
+
+Route::get('/posts/{post}', [PostController::class, 'show']);
 Route::get('/dashboard', function () {
     return redirect('/');
 })->middleware(['auth'])->name('dashboard');
