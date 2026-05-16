@@ -18,8 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}', [PostController::class, 'destroy']);
 });
 
-
 Route::get('/posts/{post}', [PostController::class, 'show']);
+
 Route::get('/dashboard', function () {
     return redirect('/');
 })->middleware(['auth'])->name('dashboard');
