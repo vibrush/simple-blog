@@ -34,7 +34,7 @@
             </p>
         </div>
 
-        @auth
+        @if(auth()->check() && $post->user_id === auth()->id())
             <div class="flex items-center justify-end gap-2 mt-8 pt-6 border-t border-slate-100">
                 <!-- Edit Button -->
                 <a href="/posts/{{ $post->id }}/edit" class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 hover:border-indigo-200 transition-colors">
@@ -56,7 +56,7 @@
                     </button>
                 </form>
             </div>
-        @endauth
+        @endif
     </article>
 </div>
 @endsection

@@ -31,18 +31,26 @@ class PostController extends Controller
             'content' => 'required'
         ]);
 
-        Post::create($request->all());
+        $request->user()->posts()->create($request->all());
 
         return redirect('/');
     }
 
     public function edit(Post $post)
     {
+        if ($post->user_id !== auth()->id()) {
+            abort(403, 'Anda tidak memiliki hak akses untuk mengedit artikel ini.');
+        }
+
         return view('posts.edit', compact('post'));
     }
 
     public function update(Request $request, Post $post)
     {
+        if ($post->user_id !== auth()->id()) {
+            abort(403, 'Anda tidak memiliki hak akses untuk mengubah artikel ini.');
+        }
+
         $request->validate([
             'title' => 'required',
             'content' => 'required'
@@ -55,6 +63,10 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        if ($post->user_id !== auth()->id()) {
+            abort(403, 'Anda tidak memiliki hak akses untuk menghapus artikel ini.');
+        }
+
         $post->delete();
 
         return redirect('/');

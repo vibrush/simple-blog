@@ -52,7 +52,7 @@
                         </svg>
                     </a>
 
-                    @auth
+                    @if(auth()->check() && $post->user_id === auth()->id())
                         <div class="flex items-center gap-2">
                             <!-- Edit Button -->
                             <a href="/posts/{{ $post->id }}/edit" class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 hover:border-indigo-200 transition-colors">
@@ -74,7 +74,7 @@
                                 </button>
                             </form>
                         </div>
-                    @endauth
+                    @endif
                 </div>
             </article>
         @empty
